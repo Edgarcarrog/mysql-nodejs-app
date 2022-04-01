@@ -30,11 +30,8 @@ exports.renderUpdateLink = async (req, res) => {
 exports.updateLink = async (req, res) => {
   const { id } = req.params;
   console.log(id);
-  console.log(req.body);
-  /* await pool.query(
-      'UPDATE links SET title = "", url= "" , url= "" WHERE id = ?',
-      [id]
-    ); */
+  const newLink = req.body;
+  await pool.query("UPDATE links SET ? WHERE id = ?", [newLink, id]);
   res.redirect("/links");
 };
 
