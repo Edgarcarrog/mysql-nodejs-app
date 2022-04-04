@@ -12,6 +12,7 @@ exports.addLink = async (req, res) => {
     description,
   };
   await pool.query("INSERT INTO links SET ?", [newLink]);
+  req.flash("success", "Link guardado correctamente");
   res.redirect("/links");
 };
 
@@ -29,7 +30,6 @@ exports.renderUpdateLink = async (req, res) => {
 
 exports.updateLink = async (req, res) => {
   const { id } = req.params;
-  console.log(id);
   const newLink = req.body;
   await pool.query("UPDATE links SET ? WHERE id = ?", [newLink, id]);
   res.redirect("/links");
